@@ -46,11 +46,14 @@ export default function CheckoutForm({ onSuccessCallback }) {
       product: config.product.title,
       quantity: quantity,
       totalPrice: config.product.price * quantity,
-      delivery: deliveryText || "Не вказано"
+      delivery: deliveryText || config.uiText.checkout.deliveryNotSpecified
     };
 
     try {
-      await fetch(config.integrations.googleSheets.webAppUrl, {
+      const url = config.integrations.googleSheets.webAppUrl;
+      if (!url) throw new Error("googleSheetsUrl не вказано в content/keys.js");
+
+      await fetch(url, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -66,6 +69,7 @@ export default function CheckoutForm({ onSuccessCallback }) {
         setTimeout(onSuccessCallback, 2000);
       }
     } catch (err) {
+      console.error("Order submit error:", err);
       setFormStatus({ type: "error", message: config.uiText.checkout.error });
     } finally {
       setIsSubmitting(false);

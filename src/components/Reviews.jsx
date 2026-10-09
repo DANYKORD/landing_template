@@ -4,10 +4,12 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import config from '../config';
+import Media from './Media';
 
 export default function Reviews() {
-  const config = window.CONFIG;
-  const images = config.reviews.map(r => r.avatarImage || r);
+  const images = config.reviews;
+  if (images.length === 0) return null;
 
   return (
     <div className="bg-gray-50 py-8 border-b border-gray-200">
@@ -25,18 +27,17 @@ export default function Reviews() {
             modules={[Navigation, Pagination]}
             spaceBetween={0}
             slidesPerView={1}
-            loop={true}
+            loop={images.length > 1}
             navigation
             pagination={{ clickable: true }}
             className="w-full"
           >
             {images.map((img, idx) => (
               <SwiperSlide key={idx}>
-                <img 
-                  src={img} 
-                  alt={`${config.uiText.reviews.reviewAlt} ${idx + 1}`} 
+                <Media
+                  media={img}
+                  alt={`${config.uiText.reviews.title} ${idx + 1}`}
                   className="w-full h-auto object-cover block"
-                  draggable={false}
                 />
               </SwiperSlide>
             ))}

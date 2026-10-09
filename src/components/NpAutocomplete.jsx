@@ -149,7 +149,7 @@ export default function NpAutocomplete({ type, placeholder, label, cityRef, onSe
               setIsOpen(false);
             }, 200);
           }}
-          placeholder={type === 'branch' && !cityRef ? "Оберіть спочатку місто..." : placeholder}
+          placeholder={type === 'branch' && !cityRef ? config.uiText.checkout.branchNeedCity : placeholder}
           className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-red-400 focus:bg-white transition font-medium text-lg"
         />
         

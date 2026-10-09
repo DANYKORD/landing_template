@@ -1,15 +1,20 @@
 import React from 'react';
 import config from '../config';
+import Media from './Media';
 
 export default function Hero({ openCheckout }) {
   return (
     <div className="w-full relative bg-white pb-8">
-      <div className="relative">
-        <img src={config.product.mainImage} alt="Main" className="w-full h-auto object-cover min-h-[300px]" />
-        <div className="absolute top-4 right-4 bg-yellow-400 text-gray-900 w-20 h-20 rounded-full flex items-center justify-center text-center font-black text-lg leading-tight shadow-lg transform rotate-12 border-4 border-white whitespace-pre-line">
-          {config.product.badge}
+      {config.product.mainImage && (
+        <div className="relative">
+          <Media media={config.product.mainImage} alt={config.product.title} className="w-full h-auto object-cover min-h-[300px]" />
+          {config.product.badge && (
+            <div className="absolute top-4 right-4 bg-yellow-400 text-gray-900 w-20 h-20 rounded-full flex items-center justify-center text-center font-black text-lg leading-tight shadow-lg transform rotate-12 border-4 border-white whitespace-pre-line">
+              {config.product.badge}
+            </div>
+          )}
         </div>
-      </div>
+      )}
       
       <div className="px-4 mt-6">
         <div className="flex items-end justify-between bg-gray-50 p-4 rounded-2xl mb-4 border border-gray-200 shadow-sm">

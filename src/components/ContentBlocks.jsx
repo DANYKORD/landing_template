@@ -1,5 +1,6 @@
 import React from 'react';
 import config from '../config';
+import Media from './Media';
 
 export default function ContentBlocks() {
   return (
@@ -8,12 +9,10 @@ export default function ContentBlocks() {
         <div key={idx} className="flex flex-col mb-0 border-b border-gray-100">
           {block.title && (
             <div className="px-4 py-4 bg-gray-50">
-              <h2 className="text-2xl font-bold text-gray-900 text-center leading-tight">{block.title}</h2>
+              <h2 className="text-2xl font-bold text-gray-900 text-center leading-tight whitespace-pre-line">{block.title}</h2>
             </div>
           )}
-          {block.image && (
-            <img src={block.image} alt={block.title} className="w-full h-auto object-cover" loading="lazy" />
-          )}
+          <Media media={block.media} alt={block.title} className="w-full h-auto object-cover" lazy />
           {block.text && (
             <div className="px-5 py-6 text-gray-800 leading-relaxed whitespace-pre-line text-[17px] font-medium">
               {block.text}
